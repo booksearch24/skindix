@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Skynix Elite - Full Ultimate Edition</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="skinix.css">
+</head>
+<body oncontextmenu="return false;">
+
+    <div id="loader-wrapper">
+        <div class="loader-circle"></div>
+        <div class="loader-text">Skynix by AFTON2007</div>
+    </div>
+
+    <div class="copyright">Credo por AFTON2007</div>
+
+    <div class="logo-fixed-right">
+        <img src="https://i.ibb.co/Y40fRrV1/enriqueprogramer.png" alt="Logo">
+    </div>
+
+    <div class="title-container">
+        <h1 class="title-rgb">skynix</h1>
+        <div id="elite-text">Elite edicion</div>
+    </div>
+
+    <div class="layout">
+        <div class="card">
+            <small style="color: #666;">SKIN BASE</small>
+            <input type="file" id="upA" accept="image/png" style="display: block; margin-top: 10px; font-size: 12px;">
+            <div class="canvas-area"><canvas id="canA" width="64" height="64"></canvas></div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+                <div class="fusion-group">
+                    <button class="btn" onclick="copyComplex('head')">CABEZA ➜</button>
+                    <div style="display: flex; gap: 4px;">
+                        <button class="btn-sub" style="flex:1" onclick="copyHeadLayer(0)">Base Layer</button>
+                        <button class="btn-sub" style="flex:1" onclick="copyHeadLayer(1)">Second Layer</button>
+                    </div>
+                </div>
+                <button class="btn" onclick="copyComplex('body')">TORSO ➜</button>
+                <button class="btn" onclick="copyComplex('arms')">BRAZOS ➜</button>
+                <button class="btn" onclick="copyComplex('legs')">PIERNAS ➜</button>
+            </div>
+        </div>
+
+        <div class="viewer-container">
+            <div class="controls-3d" style="margin-bottom: 10px; display: flex; gap: 5px;">
+                <button class="btn" style="padding: 5px 15px;" onclick="changeZoom(-5)">+</button>
+                <button class="btn" style="padding: 5px 15px;" onclick="changeZoom(5)">-</button>
+                <button class="btn" style="padding: 5px 15px;" onclick="resetView()">Reset Cam</button>
+            </div>
+            <div id="viewer3d"></div>
+            <div class="tools-panel-integrated">
+                <input type="color" id="colorPicker" value="#4caf50" style="width: 100%; height: 38px; border: none; background: none; cursor: pointer;">
+                <button id="btn-brush" class="btn active" onclick="setTool('brush')">Pincel</button>
+                <button id="btn-eraser" class="btn" onclick="setTool('eraser')">Borrador</button>
+                <div class="tools-row-2">
+                    <button id="btn-picker" class="btn" style="flex: 1;" onclick="setTool('picker')">GOTERO</button>
+                    <button onclick="undo()" class="btn btn-undo">Undo</button>
+                    <button onclick="downloadSkin()" class="btn btn-save">GUARDAR SKIN</button>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:15px;">
+            <div class="card">
+                <small style="color: var(--accent);">RESULTADO</small>
+                <input type="file" id="upB" accept="image/png" style="display: block; margin-top: 10px; font-size: 12px;">
+                <div class="canvas-area"><canvas id="canB" width="64" height="64"></canvas></div>
+                <div style="display: flex; gap: 5px; margin-bottom: 10px;">
+                    <button class="btn btn-layer" id="toggleBase" onclick="toggleLayer('base')">BASE: ON</button>
+                    <button class="btn btn-layer" id="toggleOverlay" onclick="toggleLayer('overlay')">EXTRA: ON</button>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
+                    <button class="btn" style="font-size: 9px;" onclick="togglePart(0, this)">HEAD</button>
+                    <button class="btn" style="font-size: 9px;" onclick="togglePart(1, this)">BODY</button>
+                    <button class="btn" style="font-size: 9px;" onclick="togglePart(3, this)">L-ARM</button>
+                    <button class="btn" style="font-size: 9px;" onclick="togglePart(2, this)">R-ARM</button>
+                    <button class="btn" style="font-size: 9px;" onclick="togglePart(5, this)">L-LEG</button>
+                    <button class="btn" style="font-size: 9px;" onclick="togglePart(4, this)">R-LEG</button>
+                </div>
+            </div>
+
+            <div class="card premium-card">
+                <small style="color: var(--gold);">DESARROLLO</small>
+                <div id="unlock-area">
+                    <input type="password" id="code-input" placeholder="INTRODUCE CÓDIGO">
+                    <button class="btn" onclick="checkCode()">DESBLOQUEAR</button>
+                </div>
+                <div class="premium-grid" id="premium-controls">
+                    <button class="btn btn-premium" style="background: linear-gradient(90deg, #00ffd5, #0088ff); color: black; border: none;" onclick="premiumEffect('rtx')">💎 ULTRA RTX REALISM</button>
+                    <button class="btn btn-premium" onclick="premiumEffect('smartShade')">⚡ Smart Shade Realista</button>
+                    <button class="btn btn-premium" style="color: #a2d2ff;" onclick="premiumEffect('neon')">❄️ Soft Neon Cyan</button>
+                    <button class="btn btn-premium" onclick="premiumEffect('noise')">🎲 Add Texture</button>
+                    <button id="btn-mirror" class="btn btn-premium" style="border-color: var(--purple-neon); color: white;" onclick="toggleMirror()">🪞 Mirror Mode: OFF</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="skinix.js"></script>
+</body>
+</html>
